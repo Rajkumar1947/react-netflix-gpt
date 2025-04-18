@@ -18,7 +18,6 @@ const Login = () => {
   const name = useRef(null);
   const email = useRef(null);
   const password = useRef(null);
-  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const toggleSignInForm = () => {
@@ -26,7 +25,6 @@ const Login = () => {
   };
 
   const handleButtonClick = () => {
-    // console.log(email);
     const error = checkValidData(email.current.value, password.current.value);
     setErrorMessage(error);
 
@@ -53,7 +51,7 @@ const Login = () => {
                   photoURL: photoURL,
                 })
               );
-              navigate("/browse");
+              // navigate("/browse");
             })
             .catch((error) => {
               setErrorMessage(error.message);
@@ -72,9 +70,6 @@ const Login = () => {
         password.current.value
       )
         .then((userCredential) => {
-          // Signed in
-          navigate("/browse");
-          // ...
         })
         .catch((error) => {
           const errorCode = error.code;
@@ -82,7 +77,6 @@ const Login = () => {
           setErrorMessage(errorCode + " +" + errorMessage);
         });
     }
-    // console.log(message);
   };
 
   return (

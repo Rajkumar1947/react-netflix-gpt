@@ -1,25 +1,50 @@
-import { signOut } from "firebase/auth";
+import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from "../utils/firebase";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { addUser, removeUser } from "../utils/store/slice/userSlice";
 
 const Header = () => {
   const navigate = useNavigate();
-  const user = useSelector((store) => store.userSlice);
+  const dispatch = useDispatch();
+  const user = useSelector((store) => store.user);
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        const { uid, email, displayName, photoURL } = user;
+        dispatch(
+          addUser({
+            uid: uid,
+            email: email,
+            displayName: displayName,
+            photoURL: photoURL,
+          })
+        );
+        navigate("/browse");
+      } else {
+        dispatch(removeUser());
+        navigate("/");
+      }
+    });
+
+    // Unsiubscribe when component unmounts
+    return () => unsubscribe();
+  }, []);
+
   const handleSignOut = () => {
-    console.log("sign out");
     signOut(auth)
       .then(() => {
-        navigate("/");
+        // navigate("/");
       })
       .catch((error) => {
-        navigate("/error");
+        // navigate("/error");
       });
   };
   return (
     <div className="absolute top-0 left-0 w-full flex justify-between items-center px-6 py-4 bg-black bg-opacity-80 z-10">
       <h1 className="text-4xl font-bold text-red-600">NETFLIX</h1>
-      {console.log("user", user)}
       {user && (
         <div className="flex items-center space-x-4">
           <div className="flex items-center space-x-2">

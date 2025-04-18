@@ -20,29 +20,6 @@ const Body = () => {
     },
   ]);
 
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      if (user) {
-        const { uid, email, displayName, photoURL } = user;
-        dispatch(
-          addUser({
-            uid: uid,
-            email: email,
-            displayName: displayName,
-            photoURL: photoURL,
-          })
-        );
-        // navigate("/browse");
-      } else {
-        dispatch(removeUser());
-        // navigate("/");
-      }
-    });
-
-    // Unsiubscribe when component unmounts
-    return () => unsubscribe();
-  }, []);
-
   return (
     <div className="h-full bg-black text-white-500">
       <RouterProvider router={appRouter} />

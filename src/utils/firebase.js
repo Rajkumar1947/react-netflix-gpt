@@ -6,12 +6,12 @@ import { getAuth } from "firebase/auth";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyCahX7IsTJip4DjlQ9twPb5IHLVvHNitzA",
-  authDomain: "netflix-raj-01.firebaseapp.com",
-  projectId: "netflix-raj-01",
-  storageBucket: "netflix-raj-01.firebasestorage.app",
-  messagingSenderId: "330745057279",
-  appId: "1:330745057279:web:6709e2f5b34b34b6a361ca",
+  apiKey: "AIzaSyClBJUSmzravv-lRHmlqzQOrIxeQ4Uo1f0",
+  authDomain: "poc-test-movie.firebaseapp.com",
+  projectId: "poc-test-movie",
+  storageBucket: "poc-test-movie.firebasestorage.app",
+  messagingSenderId: "376830514202",
+  appId: "1:376830514202:web:5af923b1bd6c8b63442da3",
 };
 
 // Initialize Firebase
