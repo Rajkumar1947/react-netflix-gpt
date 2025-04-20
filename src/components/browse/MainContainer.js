@@ -8,9 +8,7 @@ const MainContainer = () => {
 
   if (!popularMovies) return;
   const popularMovie = popularMovies[0];
-  console.log("Popular MOvies", popularMovie);
   const { original_title, overview, id } = popularMovie;
-
   return (
     <div className="pt-[30%] bg-black md:pt-0">
       <VideoTitle title={original_title} overview={overview} />

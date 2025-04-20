@@ -1,12 +1,10 @@
 import React from "react";
-import useMovieClipByType from "../hook/useMovieClipByType";
+import useMovieClipByType from "../../hook/useMovieClipByType";
 import { useSelector } from "react-redux";
 
 export const VideoBreakGround = ({ movieId }) => {
   useMovieClipByType(movieId, "Trailer");
-  const trailerVideo = useSelector((store) => store.movies?.trailerVideo);
-  console.log("trailerVideo", trailerVideo);
-
+  const trailerVideo = useSelector((store) => store.movies.trailerVideo);
   return (
     <div>
       {trailerVideo?.key && (

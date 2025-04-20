@@ -1,6 +1,6 @@
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from "../utils/firebase";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { addUser, removeUser } from "../utils/store/slice/userSlice";
@@ -9,6 +9,9 @@ const Header = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const user = useSelector((store) => store.user);
+  const location = useLocation();
+  const allowedPath =
+    location.pathname.startsWith("/movie") || location.pathname === "/browse";
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -22,7 +25,10 @@ const Header = () => {
             photoURL: photoURL,
           })
         );
-        navigate("/browse");
+        console.log("is true?", !allowedPath);
+        if (!allowedPath) {
+          navigate("/browse");
+        }
       } else {
         dispatch(removeUser());
         navigate("/");
